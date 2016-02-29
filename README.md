@@ -1,7 +1,7 @@
 
 # pimatic-owntracks
 
-Pimatic Plugin forOwntracks
+Pimatic Plugin for <a href="http://owntracks.org/">OwnTracks</a> location tracking app
 
 ## Status of implementation
 
@@ -46,9 +46,9 @@ The configuration for a broker is an object comprising the following properties.
 
 Devices must be added manually to the device section of your pimatic config.
 
-### Owntracks Sensor
+### Owntracks Presence Sensor
 
-`Owntracks` is a OwnTracks device based on the `PresenceSensor` device class.
+'Owntracks' is a device based on the `PresenceSensor` device class.
 
     {
       "name": "My Phone",
@@ -65,8 +65,9 @@ It has the following configuration properties:
 | Property   | Default  | Type    | Description                                 |
 |:-----------|:---------|:--------|:--------------------------------------------|
 | topic      | -        | String  | Topic for device state                      |
-| lat		 | 0        | Number  | lat number                                  |
-| long 		 | 0        | Number  | long number                                 |
+| lat		 | 0        | Number  | latitude value                              |
+| long 		 | 0        | Number  | longitude value                             |
+| radius 	 | 0        | Integer | The radius in meters 						|
 
 The presence sensor exhibits the following attributes:
 
@@ -82,12 +83,12 @@ The following predicates are supported:
 
 
 ##Configure OwnTracks
-
+<a href="http://owntracks.org/booklet/">owntracks documentation</a>
 
 ## Credits
 
-<a href="https://github.com/sweetpi">sweet pi</a> for his work on best automatization software <a href="http://pimatic.org/">Pimatic</a> and all men from the pimatic community.
+<a href="https://github.com/andremiller">Andre Miller</a> for his module <a href="https://github.com/andremiller/pimatic-mqtt-simple/">pimatic-mqtt-simple</a> from which it comes also part of the code.
 
-<a href="https://github.com/andremiller">Andre Miller</a> for for his module <a href="https://github.com/andremiller/pimatic-mqtt-simple/">pimatic-mqtt-simple</a> from which it comes also part of the code.
+<a href="https://github.com/wutu/">wutu</a> for for his module <a href="https://github.com/wutu/pimatic-mqtt">pimatic-mqtt</a> from which it comes also part of the code.
 
-<a href="https://github.com/mwittig">Marcus Wittig</a> for his nice module <a href="https://github.com/mwittig/pimatic-johnny-five">pimatic-johnny-five</a> which was a big inspiration.
+<a href="https://github.com/Oitzu/">Oitzu</a> for for his module <a href="https://github.com/Oitzu/pimatic-location">pimatic-location</a> from which it comes also part of the code.
