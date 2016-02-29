@@ -1,0 +1,59 @@
+{
+  "name": "pimatic-owntracks",
+  "description": "OwnTracks support for Pimatic",
+  "author_name": "Daniel Pressler",
+  "author_url": "https://github.com/dpressle",
+  "npmUser": "",
+  "main": "owntracks",
+  "files": [
+    "owntracks.coffee",
+    "owntracks-config-schema.coffee",
+    "device-config-schema.coffee",
+    "devices",
+    "README.md",
+    "LICENSE"
+  ],
+  "version": "0.0.1",
+  "homepage": "http://github.com/dpressle/pimatic-owntracks-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpressle/pimatic-owntracks-plugin.git"
+  },
+  "configSchema": "owntracks-config-schema.coffee",
+  "peerDependencies": {
+    "pimatic": "0.8.*"
+  },
+    "dependencies": {
+    "mqtt": ">=1.1.x",
+    "geolib": "*"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  },
+  "bugs": {
+    "url": "https://github.com/dpressle/pimatic-owntrack-plugin/issues"
+  },
+  "keywords": [
+    "pimatic",
+	"owntracks",
+    "mqtt",
+    "subscribe",
+    "publish",
+    "publish/subscribe",
+    "IoT"
+  ],
+  "license": "AGPL-3.0",
+  "_npmVersion": "2.1.5",
+  "_nodeVersion": "0.10.24",
+  "_npmUser": {
+    "name": "",
+    "email": "daniel.pressler@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "dpressle",
+      "url": "https://github.com/dpressle"
+    }
+  ]
+}
