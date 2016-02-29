@@ -6,7 +6,7 @@ module.exports = (env) ->
 
   deviceTypes = {}
   for device in [
-    'owntracks'
+    'owntracks-device'
   ]
     # convert kebap-case to camel-case notation with first character capitalized
     className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase().replace('-','')

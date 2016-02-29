@@ -48,12 +48,12 @@ Devices must be added manually to the device section of your pimatic config.
 
 ### Owntracks Presence Sensor
 
-'Owntracks' is a device based on the `PresenceSensor` device class.
+'OwntracksDevice' is a device based on the `PresenceSensor` device class.
 
     {
       "name": "My Phone",
       "id": "my-iphone",
-      "class": "Owntracks",
+      "class": "OwntracksDevice",
       "topic": "owntracks/my-phone/iphone",
       "lat": 33.19469267,
       "long": 35.65596431,

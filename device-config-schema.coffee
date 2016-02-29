@@ -1,6 +1,6 @@
 module.exports = {
   title: "pimatic-owntracks device config schemas"
-  Owntracks: {
+  OwntracksDevice: {
     title: "Owntracks config options"
     type: "object"
     extensions: ["xLink", "xPresentLabel", "xAbsentLabel"]
