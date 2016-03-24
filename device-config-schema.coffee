@@ -9,11 +9,11 @@ module.exports = {
         description: "Topic of device state"
         type: "string"
       lat:
-        description: "Latitude of your home location"
+        description: "Latitude of location to monitor"
         type: "number"
         default: 0
       long:
-        description: "Longitude of your home location"
+        description: "Longitude of location to monitor"
         type: "number"
         default: 0
       radius:

@@ -3,16 +3,9 @@ module.exports = (env) ->
 
   mqtt = require 'mqtt'
   Promise = env.require 'bluebird'
+  geolib = require 'geolib'
 
-  deviceTypes = {}
-  for device in [
-    'owntracks-device'
-  ]
-    # convert kebap-case to camel-case notation with first character capitalized
-    className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase().replace('-','')
-    deviceTypes[className] = require('./devices/' + device)(env)
-
-  # Pimatic MQTT Plugin class
+  # Pimatic Owntracks Plugin class
   class OwntracksPlugin extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
@@ -64,71 +57,69 @@ module.exports = (env) ->
         @connected = false
         env.logger.info "connected with the MQTT Broker was closed"  
 
-      # register devices
-      deviceConfigDef = require("./device-config-schema")
+      # register device
 
-      for className, classType of deviceTypes
-        env.logger.debug "Registering device class #{className}"
-        @framework.deviceManager.registerDeviceClass(className, {
-          configDef: deviceConfigDef[className],
-          createCallback: @callbackHandler(className, classType)
+      deviceConfigDef = require("./device-config-schema")
+      # @framework.ruleManager.addActionProvider(new MqttActionProvider(@framework, @mqttclient))
+
+      @framework.deviceManager.registerDeviceClass("OwntracksDevice", {
+        configDef: deviceConfigDef.OwntracksDevice
+        createCallback: (config,lastState) =>
+          device  =  new OwntracksDevice(config,lastState,@)
+          return device
         })
 
-      @framework.ruleManager.addActionProvider(new MqttActionProvider(@framework, @mqttclient))
+  class OwntracksDevice extends env.devices.PresenceSensor
 
-    callbackHandler: (className, classType) ->
-      # this closure is required to keep the className and classType context as part of the iteration
-      return (config, lastState) =>
-        return new classType(config, @, lastState)
+    constructor: (@config, lastState, @plugin) ->
+      @id = config.id
+      @name = config.name
+      @_presence = lastState?.presence?.value or false
+      @pimaticLat = config.lat
+      @pimaticLong = config.long
+      @radius = config.radius
 
+      if @plugin.connected
+        @onConnect()
 
-  # action provider for publishing mqtt messages
-  class MqttActionProvider extends env.actions.ActionProvider
-
-    constructor: (@framework, @mqttclient) ->
-
-    parseAction: (input, context) ->
-      stringMessage = null
-      stringTopic = null
-      match = null
-      fullMatch = no
-
-      setMessageString = (m, tokens) => stringMessage = tokens
-      setTopicString = (m, tokens) => stringTopic = tokens
-
-      m = env.matcher(input, context)
-        .match("publish mqtt message ")
-        .matchStringWithVars(setMessageString)
-        .match(" on topic ")
-        .matchStringWithVars(setTopicString)
-
-      if m.hadMatch()
-        match = m.getFullMatch()
-        return {
-          token: match
-          nextInput: input.substring(match.length)
-          actionHandler: new MqttActionHandler(@framework, @mqttclient, stringTopic, stringMessage)
-        }
-      else
-        return null
-
-  class MqttActionHandler extends env.actions.ActionHandler
-
-    constructor: (@framework, @mqttclient, @stringTopic, @stringMessage) ->
-
-    executeAction: (simulate) ->
-      @framework.variableManager.evaluateStringExpression(@stringTopic).then( (strTopic) =>
-        @framework.variableManager.evaluateStringExpression(@stringMessage).then( (strMessage) =>
-          if simulate
-            return Promise.resolve("publish mqtt message " + strMessage + " on topic " + strTopic)
-          else
-            #env.logger.info "publish mqtt message " + strMessage + " on topic " + strTopic
-            @mqttclient.publish(strTopic, strMessage)
-            return Promise.resolve("publish mqtt message " + strMessage + " on topic " + strTopic)
-        )
+      @plugin.mqttclient.on('connect', =>
+        @onConnect()
       )
 
-  # ###Finally
+      @plugin.mqttclient.on('message', (topic, message) =>
+        if @config.topic == topic
+          try data = JSON.parse(message)
+          if data?
+            if data then for key, value of data
+              if key == 'lat'
+                lat = value
+              if key == 'lon'
+                long = value
+            if lat? and long?
+              start_loc = {
+                lat: lat
+                lng: long
+              }
+              end_loc = {
+                lat: @pimaticLat
+                lng: @pimaticLong
+              }
+              linearDistance = geolib.getDistance(start_loc, end_loc)
+              if linearDistance < @radius
+                @_setPresence(yes)
+              else
+                @_setPresence(no)
+
+              #env.logger.debug "#{@name} with id:#{@id}: Message is not harmony with onMessage or offMessage in config.json or with default values"
+      )
+      super()
+
+    onConnect: () ->
+      @plugin.mqttclient.subscribe(@config.topic)
+
+    getPresence: () -> Promise.resolve(@_presence)
+
+
   # Create a instance of my plugin
   # and return it to the framework.
   return new OwntracksPlugin

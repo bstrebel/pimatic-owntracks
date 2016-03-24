@@ -15,7 +15,7 @@ This section is still work in progress.
 
 ## Plugin Configuration
 
-While run MQTT broker on localhost and on a standard port, without autentification, you can load the plugin by editing your `config.json` to include the following
+After setup MQTT broker, you can load the plugin by editing your `config.json` to include the following
 in the `plugins` section.
 
     {
@@ -57,7 +57,7 @@ Devices must be added manually to the device section of your pimatic config.
       "topic": "owntracks/my-phone/iphone",
       "lat": 33.19469267,
       "long": 35.65596431,
-	  "radius": 100
+      "radius": 100
     }
 
 It has the following configuration properties:
@@ -65,30 +65,28 @@ It has the following configuration properties:
 | Property   | Default  | Type    | Description                                 |
 |:-----------|:---------|:--------|:--------------------------------------------|
 | topic      | -        | String  | Topic for device state                      |
-| lat		 | 0        | Number  | latitude value                              |
-| long 		 | 0        | Number  | longitude value                             |
-| radius 	 | 0        | Integer | The radius in meters 						|
+| lat        | 0        | Number  | latitude value                              |
+| long       | 0        | Number  | longitude value                             |
+| radius     | 0        | Integer | The radius in meters                        |
 
 The presence sensor exhibits the following attributes:
 
-| Property      | Unit  | Type    | Acronym | Description                            |
-|:--------------|:------|:--------|:--------|:---------------------------------------|
+| Property      | Unit  | Type    | Acronym | Description                                      |
+|:--------------|:------|:--------|:--------|:-------------------------------------------------|
 | presence      | -     | Boolean | -       | Presence State, true is present, false is absent |
 
 The following predicates are supported:
 
 * {device} is present|absent
 
-##Rules
+##Rules example
 
-
+* if {device} is presence then switch the {switch device} on
 ##Configure OwnTracks
 <a href="http://owntracks.org/booklet/">owntracks documentation</a>
 
 ## Credits
 
-<a href="https://github.com/andremiller">Andre Miller</a> for his module <a href="https://github.com/andremiller/pimatic-mqtt-simple/">pimatic-mqtt-simple</a> from which it comes also part of the code.
+<a href="https://github.com/wutu/">wutu</a> for his module <a href="https://github.com/wutu/pimatic-mqtt">pimatic-mqtt</a> from which it comes also part of the mqtt code.
 
-<a href="https://github.com/wutu/">wutu</a> for for his module <a href="https://github.com/wutu/pimatic-mqtt">pimatic-mqtt</a> from which it comes also part of the code.
-
-<a href="https://github.com/Oitzu/">Oitzu</a> for for his module <a href="https://github.com/Oitzu/pimatic-location">pimatic-location</a> from which it comes also part of the code.
+<a href="https://github.com/Oitzu/">Oitzu</a> for for his module <a href="https://github.com/Oitzu/pimatic-location">pimatic-location</a> from which it comes also part of the presence code.

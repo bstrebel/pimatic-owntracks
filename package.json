@@ -1,7 +1,7 @@
 {
   "name": "pimatic-owntracks",
-  "description": "OwnTracks support for Pimatic",
-  "author_name": "Daniel Pressler",
+  "description": "Owntracks support for Pimatic",
+  "author_name": "dpressle",
   "author_url": "https://github.com/dpressle",
   "npmUser": "",
   "main": "owntracks",
@@ -9,11 +9,10 @@
     "owntracks.coffee",
     "owntracks-config-schema.coffee",
     "device-config-schema.coffee",
-    "devices",
     "README.md",
     "LICENSE"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "http://github.com/dpressle/pimatic-owntracks-plugin",
   "repository": {
     "type": "git",
@@ -38,17 +37,14 @@
     "pimatic",
     "owntracks",
     "mqtt",
-    "subscribe",
-    "publish",
-    "publish/subscribe",
-    "IoT"
+    "subscribe"
   ],
   "license": "AGPL-3.0",
   "_npmVersion": "2.1.5",
   "_nodeVersion": "0.10.24",
   "_npmUser": {
     "name": "",
-    "email": "daniel.pressler@gmail.com"
+    "email": ""
   },
   "maintainers": [
     {
