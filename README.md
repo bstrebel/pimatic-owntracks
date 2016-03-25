@@ -82,8 +82,8 @@ The following predicates are supported:
 ##Rules example
 
 * if {device} is presence then switch the {switch device} on
-* 
-##Configure OwnTracks
+
+## Configure OwnTracks
 
 <a href="http://owntracks.org/booklet/">owntracks documentation</a>
 
