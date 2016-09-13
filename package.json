@@ -3,7 +3,7 @@
   "description": "Owntracks support for Pimatic",
   "author_name": "dpressle",
   "author_url": "https://github.com/dpressle",
-  "npmUser": "",
+  "npmUser": "dpressle",
   "main": "owntracks",
   "files": [
     "owntracks.coffee",
@@ -12,15 +12,15 @@
     "README.md",
     "LICENSE"
   ],
-  "version": "0.0.2",
-  "homepage": "http://github.com/dpressle/pimatic-owntracks-plugin",
+  "version": "1.0.0",
+  "homepage": "http://github.com/dpressle/pimatic-owntracks",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dpressle/pimatic-owntracks-plugin.git"
+    "url": "git://github.com/dpressle/pimatic-owntracks.git"
   },
   "configSchema": "owntracks-config-schema.coffee",
   "peerDependencies": {
-    "pimatic": "0.8.*"
+    "pimatic": ">=0.8.0 <1.0.0"
   },
     "dependencies": {
     "mqtt": ">=1.1.x",
@@ -31,13 +31,11 @@
     "npm": ">1.1.x"
   },
   "bugs": {
-    "url": "https://github.com/dpressle/pimatic-owntrack-plugin/issues"
+    "url": "https://github.com/dpressle/pimatic-owntrack/issues"
   },
   "keywords": [
     "pimatic",
     "owntracks",
-    "mqtt",
-    "subscribe"
   ],
   "license": "AGPL-3.0",
   "_npmVersion": "2.1.5",
