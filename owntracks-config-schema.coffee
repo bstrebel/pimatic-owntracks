@@ -3,11 +3,11 @@ module.exports = {
   type: "object"
   properties:
     host:
-      description: "The IP or hostname of the MQTT broker (Default: 127.0.0.1)"
+      description: "The IP or hostname of the MQTT broker"
       type: "string"
       default: "127.0.0.1"
     port:
-      description: "The port of the MQTT broker (Default: 1883)"
+      description: "The port of the MQTT broker"
       type: "integer"
       default: 1883
     username:
@@ -18,8 +18,4 @@ module.exports = {
       description: "The password"
       type: "string"
       default: ""
-    emit:
-      description: "Emit Pimatic data to the Broker"
-      type: "boolean"
-      default: false
 }
