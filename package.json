@@ -12,7 +12,7 @@
     "README.md",
     "LICENSE"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://github.com/dpressle/pimatic-owntracks",
   "repository": {
     "type": "git",
