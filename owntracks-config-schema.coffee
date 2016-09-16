@@ -1,21 +1,24 @@
 module.exports = {
-  title: "OwnTracks plugin config options"
-  type: "object"
-  properties:
-    host:
-      description: "The IP or hostname of the MQTT broker"
-      type: "string"
-      default: "127.0.0.1"
-    port:
-      description: "The port of the MQTT broker"
-      type: "integer"
-      default: 1883
-    username:
-      description: "The login name"
-      type: "string"
-      default: ""
-    password:
-      description: "The password"
-      type: "string"
-      default: ""
+  title: "pimatic-owntracks device config schemas"
+  OwntracksDevice: {
+    title: "Owntracks config options"
+    type: "object"
+    extensions: ["xLink", "xPresentLabel", "xAbsentLabel"]
+    properties:
+      topic:
+        description: "Topic of device state"
+        type: "string"
+      lat:
+        description: "Latitude of location to monitor"
+        type: "number"
+        default: 0
+      long:
+        description: "Longitude of location to monitor"
+        type: "number"
+        default: 0
+      radius:
+        description: "The radius in meters from location to set presense"
+        type: "number"
+        default: 100
+  }
 }
